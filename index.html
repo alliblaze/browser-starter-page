@@ -1,38 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starter Page</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="favicon.png" type="image/png">
-</head>
-<body>
-    <header>
-        <h1>Welcome to My Starter Page</h1>
-        <p>Your journey begins here.</p>
-        <a href="#" class="btn-primary">Get Started</a>
-    </header>
+document.getElementById("searchForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const input = document.getElementById("searchInput").value.trim();
 
-    <main>
-        <section class="features">
-            <div class="feature">
-                <h2>Feature One</h2>
-                <p>Describe your first feature here in a concise, catchy way.</p>
-            </div>
-            <div class="feature">
-                <h2>Feature Two</h2>
-                <p>Describe your second feature here. Keep it short and clear.</p>
-            </div>
-            <div class="feature">
-                <h2>Feature Three</h2>
-                <p>Highlight another cool aspect of your site.</p>
-            </div>
-        </section>
-    </main>
+    if(!input) return;
 
-    <footer>
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+    let url;
+
+    // If it looks like a URL (starts with http:// or https:// or www.)
+    if(input.startsWith("http://") || input.startsWith("https://")){
+        url = input;
+    } else if(input.startsWith("www.")){
+        url = "https://" + input;
+    } else {
+        // Otherwise treat as Google search
+        url = "https://www.google.com/search?q=" + encodeURIComponent(input);
+    }
+
+    window.open(url, "_self"); // Open in same tab
+});
