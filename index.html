@@ -15,12 +15,30 @@
             <input type="text" id="searchInput" placeholder="Search Google or enter URL" autocomplete="off">
             <button type="submit">Go</button>
         </form>
+        <script>
+document.getElementById("searchForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const input = document.getElementById("searchInput").value.trim();
+    if(!input) return;
+    let url;
+
+    if(input.startsWith("http://") || input.startsWith("https://")){
+        url = input;
+    } else if(input.startsWith("www.")){
+        url = "https://" + input;
+    } else {
+        url = "https://www.google.com/search?q=" + encodeURIComponent(input);
+    }
+
+    window.open(url, "_self");
+});
+</script>
+
     </div>
 
     <footer>
         <p>&copy; 2025 Starter New Tab Page</p>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
